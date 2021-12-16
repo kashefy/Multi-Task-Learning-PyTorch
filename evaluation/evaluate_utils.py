@@ -214,8 +214,8 @@ def save_model_predictions(p, val_loader, model):
             for jj in range(int(inputs.size()[0])):
                 if len(sample[task][jj].unique()) == 1 and sample[task][jj].unique() == 255:
                     continue
-                fname = meta['image'][jj]                
-                result = cv2.resize(output_task[jj], dsize=(meta['im_size'][1][jj], meta['im_size'][0][jj]), interpolation=p.TASKS.INFER_FLAGVALS[task])
+                fname = meta['image'][jj]      
+                result = cv2.resize(output_task[jj], dsize=(meta['im_size'][1][jj].item(), meta['im_size'][0][jj].item()), interpolation=p.TASKS.INFER_FLAGVALS[task])
                 if task == 'depth':
                     sio.savemat(os.path.join(save_dirs[task], fname + '.mat'), {'depth': result})
                 else:
